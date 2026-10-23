@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Orbit Meet</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <section id="landingScreen" class="landing-screen" aria-labelledby="landingTitle">
+      <div class="landing-orb orb-one"></div><div class="landing-orb orb-two"></div>
+      <div class="landing-card">
+        <div class="brand"><span class="brand-mark">O</span><span>Orbit Meet</span></div>
+        <p class="eyebrow">SIMPLE, HUMAN VIDEO</p>
+        <h1 id="landingTitle">Meet without the friction.</h1>
+        <p class="landing-copy">Start a private room in seconds, or join a conversation already in motion.</p>
+        <label class="field-label" for="usernameInput">Your display name</label>
+        <input id="usernameInput" class="text-input" type="text" maxlength="40" autocomplete="name" placeholder="e.g. Alex Morgan" />
+        <button id="createMeetingBtn" class="primary-button" type="button">Create meeting <span>→</span></button>
+        <div id="createdRoomBox" class="created-room hidden" aria-live="polite">
+          <span>YOUR ROOM ID</span><strong id="createdRoomId"></strong>
+          <button id="copyCreatedRoomBtn" class="small-button" type="button">Copy room ID</button>
+        </div>
+        <div class="join-divider"><span>or join a meeting</span></div>
+        <label class="field-label" for="roomIdInput">Room ID</label>
+        <div class="join-row">
+          <input id="roomIdInput" class="text-input" type="text" maxlength="80" autocomplete="off" placeholder="Paste a room ID" />
+          <button id="joinMeetingBtn" class="secondary-button" type="button">Join</button>
+        </div>
+        <p id="landingFeedback" class="feedback" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="meetingScreen" class="meeting-screen hidden" aria-label="Meeting room">
+      <header class="topbar">
+        <div class="topbar-brand"><span class="brand-mark">O</span><span>Orbit Meet</span></div>
+        <div class="room-summary"><span class="room-label">ROOM</span><code id="roomIdLabel"></code><span class="participant-badge"><span class="status-dot"></span><span id="participantCount">1</span></span></div>
+        <div class="topbar-actions"><button id="copyRoomBtn" class="header-button" type="button">Copy ID</button><button id="leaveMeetingBtn" class="leave-button" type="button">Leave</button></div>
+      </header>
+
+      <section class="meeting-stage">
+        <div id="videoGrid" class="video-grid" aria-label="Participant videos"></div>
+        <p id="meetingFeedback" class="meeting-feedback" aria-live="polite"></p>
+      </section>
+
+      <aside id="sidePanel" class="side-panel hidden" aria-label="Meeting details">
+        <div class="panel-tabs"><button class="panel-tab active" data-panel="chat" type="button">Chat</button><button class="panel-tab" data-panel="participants" type="button">People <span id="panelParticipantCount">1</span></button><button id="closePanelBtn" class="icon-button panel-close" type="button" aria-label="Close panel">×</button></div>
+        <div id="chatPanel" class="panel-content">
+          <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+          <form id="chatForm" class="chat-form"><input id="chatInput" type="text" maxlength="1000" autocomplete="off" placeholder="Write a message…" /><button type="submit" aria-label="Send message">↑</button></form>
+        </div>
+        <div id="participantsPanel" class="panel-content hidden"><p class="panel-heading">In this meeting</p><ul id="participantList" class="participant-list"></ul></div>
+      </aside>
+
+      <footer class="control-bar">
+        <button id="micBtn" class="control-button" type="button" aria-pressed="false"><span class="control-icon">🎙</span><span>Mute</span></button>
+        <button id="cameraBtn" class="control-button" type="button" aria-pressed="false"><span class="control-icon">◉</span><span>Camera</span></button>
+        <button id="participantsBtn" class="control-button" type="button" aria-pressed="false"><span class="control-icon">♧</span><span>People</span></button>
+        <button id="chatBtn" class="control-button" type="button" aria-pressed="false"><span class="control-icon">✦</span><span>Chat</span></button>
+        <button id="leaveMobileBtn" class="control-button danger-mobile" type="button"><span class="control-icon">☎</span><span>Leave</span></button>
+      </footer>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.1.1/bundles/stomp.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
